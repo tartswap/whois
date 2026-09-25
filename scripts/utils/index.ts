@@ -188,7 +188,8 @@ export const sanitiseTokenData = (token: TokenData) => {
 
   return {
     symbol: token.symbol,
-    decimals: token.decimals,
+    // Some token lists store decimals as a string (e.g. "6"), which breaks viem's formatUnits in the app
+    decimals: token.decimals === undefined ? undefined : Number(token.decimals),
     logoURI:
       logoOverrides[token.symbol] ||
       token.logoURI
