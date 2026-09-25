@@ -3,13 +3,13 @@
   "label": "Concentric: WINR/USDC.e",
   "riskFactors": [
     {
+      "type": "deprecated",
+      "source": "whois"
+    },
+    {
       "type": "exploit",
       "source": "whois",
       "data": "Concentric Hack"
-    },
-    {
-      "type": "deprecated",
-      "source": "whois"
     }
   ]
 }

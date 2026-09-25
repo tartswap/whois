@@ -1,0 +1,10 @@
+{
+  "name": "RnsPay",
+  "label": "RnsPay: Exploited",
+  "riskFactors": [
+    {
+      "type": "exploit",
+      "source": "whois"
+    }
+  ]
+}

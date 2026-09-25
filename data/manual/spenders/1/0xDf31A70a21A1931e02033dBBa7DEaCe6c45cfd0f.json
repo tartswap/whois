@@ -1,0 +1,10 @@
+{
+  "name": "0x",
+  "label": "0x: Settler",
+  "riskFactors": [
+    {
+      "type": "unsafe",
+      "source": "whois"
+    }
+  ]
+}

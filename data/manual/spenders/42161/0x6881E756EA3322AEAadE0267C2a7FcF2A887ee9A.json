@@ -3,13 +3,13 @@
   "label": "Moby Trade: mRewardRouterV2",
   "riskFactors": [
     {
+      "type": "deprecated",
+      "source": "whois"
+    },
+    {
       "type": "exploit",
       "source": "whois",
       "data": "Moby Trade Hack"
-    },
-    {
-      "type": "deprecated",
-      "source": "whois"
     }
   ]
 }

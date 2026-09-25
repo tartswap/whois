@@ -1,0 +1,10 @@
+{
+  "name": "Yodl",
+  "label": "Yodl: YodlRouter",
+  "riskFactors": [
+    {
+      "type": "exploit",
+      "source": "whois"
+    }
+  ]
+}

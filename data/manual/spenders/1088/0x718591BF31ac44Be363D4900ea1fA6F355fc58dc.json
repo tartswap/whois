@@ -1,0 +1,10 @@
+{
+  "name": "Beefy",
+  "label": "Beefy: ZapRouter",
+  "riskFactors": [
+    {
+      "type": "unsafe",
+      "source": "whois"
+    }
+  ]
+}

@@ -3,13 +3,13 @@
   "label": "Dexible: Proxy",
   "riskFactors": [
     {
+      "type": "deprecated",
+      "source": "whois"
+    },
+    {
       "type": "exploit",
       "source": "whois",
       "data": "Dexible Hack"
-    },
-    {
-      "type": "deprecated",
-      "source": "whois"
     }
   ]
 }

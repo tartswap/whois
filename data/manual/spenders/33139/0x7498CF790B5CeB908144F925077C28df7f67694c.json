@@ -3,13 +3,13 @@
   "label": "Fisclend",
   "riskFactors": [
     {
+      "type": "deprecated",
+      "source": "whois"
+    },
+    {
       "type": "exploit",
       "source": "whois",
       "data": "Fisclend Rug Pull"
-    },
-    {
-      "type": "deprecated",
-      "source": "whois"
     }
   ]
 }

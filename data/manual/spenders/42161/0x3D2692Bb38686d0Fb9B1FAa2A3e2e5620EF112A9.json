@@ -3,13 +3,13 @@
   "label": "Orange Finance: odpxBOOP-WETH",
   "riskFactors": [
     {
+      "type": "deprecated",
+      "source": "whois"
+    },
+    {
       "type": "exploit",
       "source": "whois",
       "data": "Orange Finance Hack"
-    },
-    {
-      "type": "deprecated",
-      "source": "whois"
     }
   ]
 }

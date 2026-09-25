@@ -1,0 +1,11 @@
+{
+  "name": "Magic Eden",
+  "label": "Magic Eden: Payment Processor V2 (Limit Break)",
+  "riskFactors": [
+    {
+      "type": "exploit",
+      "source": "whois",
+      "data": "Magic Eden / Limit Break Hack"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "THORSwap",
+  "label": "THORSwap: Aggregator",
+  "riskFactors": [
+    {
+      "type": "exploit",
+      "source": "whois"
+    }
+  ]
+}

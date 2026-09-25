@@ -1,0 +1,10 @@
+{
+  "name": "Squid",
+  "label": "Squid: Multicall",
+  "riskFactors": [
+    {
+      "type": "unsafe",
+      "source": "whois"
+    }
+  ]
+}

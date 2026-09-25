@@ -1,0 +1,10 @@
+{
+  "name": "Bebop",
+  "label": "Bebop: JamSettlement",
+  "riskFactors": [
+    {
+      "type": "unsafe",
+      "source": "whois"
+    }
+  ]
+}

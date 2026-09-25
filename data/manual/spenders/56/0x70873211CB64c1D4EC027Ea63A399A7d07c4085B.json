@@ -1,0 +1,10 @@
+{
+  "name": "Crosswise Finance",
+  "label": "Crosswise Finance: MasterChef",
+  "riskFactors": [
+    {
+      "type": "exploit",
+      "source": "whois"
+    }
+  ]
+}

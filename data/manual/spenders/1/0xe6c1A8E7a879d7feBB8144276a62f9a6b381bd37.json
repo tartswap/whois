@@ -3,13 +3,13 @@
   "label": "BarnBridge: cDAI Provider",
   "riskFactors": [
     {
+      "type": "deprecated",
+      "source": "whois"
+    },
+    {
       "type": "exploit",
       "source": "whois",
       "data": "BarnBridge Governance Attack"
-    },
-    {
-      "type": "deprecated",
-      "source": "whois"
     }
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "name": "Limit Order Protocol",
+  "label": "Limit Order Protocol (Base): Exploited",
+  "riskFactors": [
+    {
+      "type": "exploit",
+      "source": "whois"
+    }
+  ]
+}

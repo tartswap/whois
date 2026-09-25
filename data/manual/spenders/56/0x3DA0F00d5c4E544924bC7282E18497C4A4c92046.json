@@ -1,0 +1,10 @@
+{
+  "name": "Unverified Multicall",
+  "label": "Unverified Multicall: Exploited",
+  "riskFactors": [
+    {
+      "type": "exploit",
+      "source": "whois"
+    }
+  ]
+}

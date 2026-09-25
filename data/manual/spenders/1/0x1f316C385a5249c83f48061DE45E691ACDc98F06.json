@@ -3,13 +3,13 @@
   "label": "BasketDAO: Delayed BDI Burner",
   "riskFactors": [
     {
+      "type": "deprecated",
+      "source": "whois"
+    },
+    {
       "type": "exploit",
       "source": "whois",
       "data": "BasketDAO Peripheral Exploit"
-    },
-    {
-      "type": "deprecated",
-      "source": "whois"
     }
   ]
 }

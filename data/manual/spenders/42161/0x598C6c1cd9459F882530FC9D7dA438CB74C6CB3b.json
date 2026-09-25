@@ -1,0 +1,11 @@
+{
+  "name": "Rico Credit System",
+  "label": "Rico Credit System: BankDiamond",
+  "riskFactors": [
+    {
+      "type": "exploit",
+      "source": "whois",
+      "data": "Rico Credit System Hack"
+    }
+  ]
+}

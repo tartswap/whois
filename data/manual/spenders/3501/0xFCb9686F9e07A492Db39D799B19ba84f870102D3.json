@@ -1,0 +1,11 @@
+{
+  "name": "Liquid Crypto",
+  "label": "Liquid Crypto: LiquidXv2Zap",
+  "riskFactors": [
+    {
+      "type": "exploit",
+      "source": "whois",
+      "data": "Liquid Crypto Hack"
+    }
+  ]
+}

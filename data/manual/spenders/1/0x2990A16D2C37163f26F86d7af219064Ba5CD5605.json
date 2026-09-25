@@ -1,0 +1,10 @@
+{
+  "name": "Unverified AllowanceTarget",
+  "label": "Unverified AllowanceTarget: Exploited",
+  "riskFactors": [
+    {
+      "type": "exploit",
+      "source": "whois"
+    }
+  ]
+}

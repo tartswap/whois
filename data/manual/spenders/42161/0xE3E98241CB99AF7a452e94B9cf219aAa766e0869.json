@@ -1,0 +1,11 @@
+{
+  "name": "WINR Protocol",
+  "label": "WINR Protocol: MixedSwapRouter",
+  "riskFactors": [
+    {
+      "type": "exploit",
+      "source": "whois",
+      "data": "WINR Hack"
+    }
+  ]
+}
