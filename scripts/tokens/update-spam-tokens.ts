@@ -1,6 +1,6 @@
 import { ChainId } from '@revoke.cash/chains';
 import { getAddress } from 'viem';
-import { writeData } from '../utils';
+import { mapWithConcurrency, writeData } from '../utils';
 
 interface Chain {
   chainId: number | string;
@@ -51,7 +51,7 @@ const importSpamTokens = async ({ chainId, chainSlug }: Chain) => {
 
   console.log(`[${chainSlug}] Found ${data?.contractAddresses?.length ?? 0} spam tokens`);
 
-  data?.contractAddresses?.forEach(async (tokenAddress: string) => {
+  await mapWithConcurrency(data?.contractAddresses ?? [], async (tokenAddress: string) => {
     await writeData('generated', 'tokens', String(chainId), getAddress(tokenAddress), {
       isSpam: true,
       note: 'Source: Alchemy',

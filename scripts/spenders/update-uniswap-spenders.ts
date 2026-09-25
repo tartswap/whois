@@ -16,6 +16,7 @@ const processChainFiles = async (): Promise<void> => {
 
 const processChainFile = async (filePath: string) => {
   const slugToChainId: Record<string, number> = {
+    arc: ChainId.Arc,
     'arbitrum-goerli': ChainId.ArbitrumGoerli,
     arbitrum: ChainId.ArbitrumOne,
     avalanche: ChainId['AvalancheC-Chain'],
@@ -27,28 +28,35 @@ const processChainFile = async (filePath: string) => {
     'celo-alfajores': ChainId.CeloAlfajoresTestnet,
     celo: ChainId.CeloMainnet,
     goerli: ChainId.Goerli,
+    hyperevm: 999,
     ink: ChainId.Ink,
+    linea: ChainId.Linea,
     mainnet: ChainId.EthereumMainnet,
+    megaeth: ChainId.MegaETHMainnet,
+    monad: ChainId.Monad,
     'op-sepolia': ChainId.OPSepoliaTestnet,
     'optimism-goerli': ChainId.OptimismGoerliTestnet,
     optimism: ChainId.OPMainnet,
     'polygon-mumbai': ChainId.Mumbai,
     polygon: ChainId.PolygonMainnet,
+    robinhood: ChainId.RobinhoodChain,
     sepolia: ChainId.EthereumSepolia,
     soneium: ChainId.Soneium,
+    tempo: ChainId.TempoMainnetPresto,
     'unichain-sepolia': ChainId.UnichainSepoliaTestnet,
     unichain: ChainId.Unichain,
     worldchain: ChainId.WorldChain,
+    xlayer: ChainId.XLayerMainnet,
     zora: ChainId.Zora,
   };
 
   const chainSlug = filePath.replace(`${DEPLOYMENTS_PATH}/`, '').replace('.json', '');
 
-  const chainId = String(slugToChainId[chainSlug]);
-
-  if (!chainId) {
+  if (!slugToChainId[chainSlug]) {
     throw new Error(`Unknown chain slug: ${chainSlug}`);
   }
+
+  const chainId = String(slugToChainId[chainSlug]);
 
   const contents = await readFile(filePath, 'utf-8').then((contents) => JSON.parse(contents));
 
@@ -100,7 +108,17 @@ const processChainFile = async (filePath: string) => {
         name: 'Uniswap',
         label: 'Uniswap: Universal Router v2.1.1',
       });
-    } else if (key === 'UnsupportedProtocol') {
+    } else if (key === 'UniversalRouterV2_1_2') {
+      await writeData('generated', 'spenders', chainId, value, {
+        name: 'Uniswap',
+        label: 'Uniswap: Universal Router v2.1.2',
+      });
+    } else if (key === 'UniversalRouterV2_2_0') {
+      await writeData('generated', 'spenders', chainId, value, {
+        name: 'Uniswap',
+        label: 'Uniswap: Universal Router v2.2.0',
+      });
+    } else if (key === 'UnsupportedProtocol' || key === 'UnsupportedProtocolV2_1_2') {
       // pass
     } else {
       throw new Error(`Unknown spender: ${key}`);

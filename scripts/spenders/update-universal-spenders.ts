@@ -1,6 +1,6 @@
 import { ChainId } from '@revoke.cash/chains';
 import { Address } from 'viem';
-import { writeData } from '../utils';
+import { mapWithConcurrency, writeData } from '../utils';
 import { allChainIds } from '../utils/constants';
 import { SpenderData } from '../utils/types';
 
@@ -673,10 +673,17 @@ const SCAM_DELEGATES: UniversalSpenders = SCAM_DELEGATES_ADDRESSES.reduce<Univer
   {},
 );
 
-console.log('Updating universal spenders');
+const run = async () => {
+  console.log('Updating universal spenders');
 
-Object.entries({ ...UNIVERSAL_SPENDERS, ...UNIVERSAL_DELEGATES, ...SCAM_DELEGATES }).forEach(([address, spender]) => {
-  spender.chains.forEach(async (chainId) => {
+  const spenders = Object.entries({ ...UNIVERSAL_SPENDERS, ...UNIVERSAL_DELEGATES, ...SCAM_DELEGATES });
+  const entries = spenders.flatMap(([address, spender]) =>
+    spender.chains.map((chainId) => ({ address, chainId, spender })),
+  );
+
+  await mapWithConcurrency(entries, async ({ address, chainId, spender }) => {
     await writeData('generated', 'spenders', String(chainId), address, spender.data);
   });
-});
+};
+
+run();

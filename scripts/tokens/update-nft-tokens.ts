@@ -1,6 +1,6 @@
 import { ChainId } from '@revoke.cash/chains';
 import { Address, getAddress } from 'viem';
-import { sleep, writeData } from '../utils';
+import { mapWithConcurrency, sleep, writeData } from '../utils';
 import { TokenData } from '../utils/types';
 
 interface Chain {
@@ -160,10 +160,8 @@ const updateNftTokenlist = async ({ chainId, chainSlug, maxPages = 20 }: Chain) 
   }
 
   // Merge with the existing mapping and write to file (prefer the new data)
-  await Promise.all(
-    Object.entries(retrievedMapping).map(([address, token]) =>
-      writeData('generated', 'tokens', String(chainId), address, token),
-    ),
+  await mapWithConcurrency(Object.entries(retrievedMapping), ([address, token]) =>
+    writeData('generated', 'tokens', String(chainId), address, token),
   );
 };
 

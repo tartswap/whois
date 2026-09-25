@@ -1,4 +1,4 @@
-import { writeData } from '../utils';
+import { mapWithConcurrency, writeData } from '../utils';
 import { SCAMSNIFFER_API_KEY } from '../utils/constants';
 import { SpenderData } from '../utils/types';
 
@@ -11,7 +11,7 @@ const run = async () => {
     },
   }).then((res) => res.json());
 
-  scamSnifferBlocklist.forEach(async (identifier: string) => {
+  await mapWithConcurrency(scamSnifferBlocklist, async (identifier: string) => {
     const spenderData: SpenderData = {
       riskFactors: [{ type: 'blocklist', source: 'scamsniffer' }],
     };

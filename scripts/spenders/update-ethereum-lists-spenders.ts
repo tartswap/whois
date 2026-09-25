@@ -3,7 +3,7 @@ import { readFile } from 'fs/promises';
 import path from 'path';
 import { Address } from 'viem';
 import walkdir from 'walkdir';
-import { sleep, writeData } from '../utils';
+import { mapWithConcurrency, sleep, writeData } from '../utils';
 
 const CLONE_REPO = 'git@github.com:ethereum-lists/contracts.git';
 const CLONE_PATH = path.join(__dirname, '..', '..', 'temp', 'ethereum-lists');
@@ -12,7 +12,7 @@ const CONTRACTS_PATH = path.join(CLONE_PATH, 'contracts');
 
 const readProjects = async (): Promise<Record<string, string>> => {
   const paths = walkdir.sync(PROJECTS_PATH).filter((filePath) => filePath.endsWith('.json'));
-  const entries = await Promise.all(paths.map(readProject));
+  const entries = await mapWithConcurrency(paths, readProject);
   return Object.fromEntries(entries);
 };
 
@@ -29,7 +29,7 @@ const readProject = async (filePath: string): Promise<[string, string]> => {
 
 const processContracts = async (projects: Record<string, string>) => {
   const paths = walkdir.sync(CONTRACTS_PATH).filter((filePath) => filePath.endsWith('.json'));
-  await Promise.all(paths.map((filePath) => processContract(filePath, projects)));
+  await mapWithConcurrency(paths, (filePath) => processContract(filePath, projects));
 };
 
 const processContract = async (filePath: string, projects: Record<string, string>) => {

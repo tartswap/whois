@@ -1,6 +1,6 @@
 {
-  "name": "Limit Break",
-  "label": "Limit Break: Payment Processor V3",
+  "name": "Magic Eden",
+  "label": "Magic Eden: Payment Processor V2 (Limit Break)",
   "riskFactors": [
     {
       "type": "exploit",

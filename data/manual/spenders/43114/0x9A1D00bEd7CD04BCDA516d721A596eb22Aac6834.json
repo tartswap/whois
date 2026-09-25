@@ -1,6 +1,6 @@
 {
   "name": "Limit Break",
-  "label": "Limit Break: Payment Processor V3",
+  "label": "Limit Break: Payment Processor V2",
   "riskFactors": [
     {
       "type": "exploit",

@@ -1,5 +1,5 @@
 import { ChainId, getChainById } from '@revoke.cash/chains';
-import { isSupportedAddress, normaliseIdentifier, sleep, writeData } from 'scripts/utils';
+import { isSupportedAddress, mapWithConcurrency, normaliseIdentifier, sleep, writeData } from 'scripts/utils';
 import { allChainIds } from 'scripts/utils/constants';
 import { getAddress, isAddress } from 'viem';
 import { TokenData, TokenMapping } from '../utils/types';
@@ -187,7 +187,7 @@ const updateErc20Tokenlist = async () => {
 
     console.log(chainString, `Found ${Object.keys(mapping).length} tokens`);
 
-    await Promise.all(Object.entries(mapping).map(([address, token]) => writeToken(token, address, chainId)));
+    await mapWithConcurrency(Object.entries(mapping), ([address, token]) => writeToken(token, address, chainId));
 
     // Wait for rate limiting (50/min)
     await sleep(2000);

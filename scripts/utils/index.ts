@@ -7,6 +7,7 @@ import {
 } from '@aws-sdk/client-s3';
 import { ChainId } from '@revoke.cash/chains';
 import { mkdir, readFile, writeFile } from 'fs/promises';
+import PQueue from 'p-queue';
 import path from 'path';
 import { Address, getAddress, isAddress, sha256 } from 'viem';
 import walkdir from 'walkdir';
@@ -14,6 +15,16 @@ import { DATA_BASE_PATH } from './constants';
 import { AddressType, Data, DataType, ParsedPath, SpenderData, TokenData } from './types';
 
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Running thousands of file operations at once can exceed the open file limit (EMFILE), so we cap how many run at a time
+export const mapWithConcurrency = async <T, R>(
+  items: T[],
+  fn: (item: T) => Promise<R>,
+  concurrency: number = 100,
+): Promise<R[]> => {
+  const queue = new PQueue({ concurrency });
+  return Promise.all(items.map((item) => queue.add(() => fn(item))));
+};
 
 export const getDataPath = (
   dataType: DataType,
@@ -202,13 +213,11 @@ export const sanitiseSpenderData = (spender: SpenderData) => {
 export const copyManualData = async (addressType: AddressType) => {
   const paths = await walkdir.async(path.join(DATA_BASE_PATH, 'manual', addressType));
   const dataPaths = paths.filter((path) => path.endsWith('.json'));
-  await Promise.all(
-    dataPaths.map(async (dataPath) => {
-      const { addressType, subdirectoryOrChainId, identifier } = parsePath(dataPath);
-      const data = await readData('manual', addressType, subdirectoryOrChainId, identifier);
-      await writeData('generated', addressType, subdirectoryOrChainId, identifier, data);
-    }),
-  );
+  await mapWithConcurrency(dataPaths, async (dataPath) => {
+    const { addressType, subdirectoryOrChainId, identifier } = parsePath(dataPath);
+    const data = await readData('manual', addressType, subdirectoryOrChainId, identifier);
+    await writeData('generated', addressType, subdirectoryOrChainId, identifier, data);
+  });
 };
 
 export const isSupportedAddress = (chainId: number, address: string) => {
